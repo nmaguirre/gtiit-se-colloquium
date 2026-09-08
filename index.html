@@ -36,16 +36,34 @@
     /* ── Logo / SVG mark ── */
     .logo-mark {
       display: block;
-      margin: 0 auto 2rem;
-      width: 250px;
-      height:250px;
+      flex-shrink: 0;
+      width: 220px;
+      height: 220px;
+    }
+
+    /* ── Header inner layout ── */
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      text-align: left;
+    }
+    .header-text { display: flex; flex-direction: column; gap: 0.6rem; }
+    .header-text h1 { margin: 0; }
+    .header-text .workshop-label { margin-bottom: 0; }
+    .header-text .meta-line { justify-content: flex-start; }
+
+    @media (max-width: 680px) {
+      .header-inner { flex-direction: column; text-align: center; gap: 1.2rem; }
+      .header-text .meta-line { justify-content: center; }
+      .logo-mark { width: 160px; height: 160px; }
     }
 
     /* ── Header ── */
     header {
       border-bottom: 2px solid var(--ink);
       padding: 3rem 0 2.5rem;
-      text-align: center;
     }
     .workshop-label {
       font-family: 'Inter', sans-serif;
@@ -224,6 +242,7 @@
 <header>
   <div class="container">
 
+    <div class="header-inner">
     <!-- SVG Logo Mark -->
     <svg class="logo-mark" viewBox="0 0 680 540" xmlns="http://www.w3.org/2000/svg" aria-label="Colloquium logo mark — gear with Hoare triple and GTIIT state machine">
       <defs>
@@ -272,12 +291,14 @@
       <text x="460" y="246" font-family="'Courier New', monospace" font-size="14" font-weight="700" fill="#3b6d11" text-anchor="middle">T</text>
 
     </svg>
-
-    <p class="workshop-label">GTIIT · Shantou, China · 2026</p>
-    <h1>Colloquium on the Foundations of Modern Software Engineering</h1>
-    <div class="meta-line">
-      <span>📅 October 30 – November 1, 2026</span>
-      <span>📍 GTIIT, Shantou, Guangdong, China</span>
+    <div class="header-text">
+      <p class="workshop-label">GTIIT · Shantou, China · 2026</p>
+      <h1>Colloquium on the Foundations of Modern Software Engineering</h1>
+      <div class="meta-line">
+        <span>📅 October 30 – November 1, 2026</span>
+        <span>📍 GTIIT, Shantou, Guangdong, China</span>
+      </div>
+    </div>
     </div>
   </div>
 </header>
