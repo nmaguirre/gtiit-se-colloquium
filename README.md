@@ -1,6 +1,6 @@
 # GTIIT Colloquium on the Foundations of Modern Software Engineering
 
-Website for the GTIIT Colloquium on the Foundations of Modern Software Engineering, taking place October 30 – November 1, 2025, at GTIIT, Shantou, Guangdong, China.
+Website for the GTIIT Colloquium on the Foundations of Modern Software Engineering, taking place October 30 – November 1, 2026, at GTIIT, Shantou, Guangdong, China.
 
 ## Editing the site
 
