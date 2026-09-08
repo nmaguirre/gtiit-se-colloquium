@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GTIIT Colloquium on the Foundations of Modern Software Engineering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --ink:       #1a1f2e;
+      --paper:     #f7f6f2;
+      --rule:      #c8c4b8;
+      --accent:    #2a5ca8;   /* deep institutional blue */
+      --accent2:   #5e9e6e;   /* muted pine green — nod to both Guangdong lush hills and CS "green" tests */
+      --muted:     #6b6860;
+      --max:       860px;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.65;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    /* ── Layout ── */
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── Logo / SVG mark ── */
+    .logo-mark {
+      display: block;
+      margin: 0 auto 2rem;
+      width: 120px;
+      height: 120px;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 2px solid var(--ink);
+      padding: 3rem 0 2.5rem;
+      text-align: center;
+    }
+    .workshop-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+    h1 {
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      max-width: 700px;
+      margin: 0 auto 1.2rem;
+    }
+    .meta-line {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: center;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+    }
+    .meta-line span { display: flex; align-items: center; gap: 0.4rem; }
+
+    /* ── Nav ── */
+    nav {
+      border-bottom: 1px solid var(--rule);
+      background: var(--paper);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 0;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav a {
+      display: block;
+      padding: 0.85rem 1.2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    nav a:hover { color: var(--ink); border-color: var(--accent); }
+
+    /* ── Sections ── */
+    section { padding: 4rem 0; border-bottom: 1px solid var(--rule); }
+    section:last-of-type { border-bottom: none; }
+    h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 1.4rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    p { max-width: 68ch; margin-bottom: 1rem; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── About highlight ── */
+    .about-intro {
+      font-size: 1.18rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ink);
+      border-left: 3px solid var(--accent2);
+      padding-left: 1.2rem;
+      margin-bottom: 1.6rem;
+      max-width: 58ch;
+    }
+
+    /* ── Speakers ── */
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+    .speaker-card {
+      border: 1px solid var(--rule);
+      padding: 1.2rem 1.4rem;
+      background: white;
+    }
+    .speaker-card .name {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+    .speaker-card .affiliation {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .organizer-tag {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.1rem 0.45rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ── Program / Schedule ── */
+    .schedule-block { margin-bottom: 2rem; }
+    .schedule-block h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 0.7rem;
+    }
+    .day-label {
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-left: 3px solid var(--accent2);
+      padding-left: 0.8rem;
+      margin-bottom: 0.8rem;
+    }
+    .tba {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      background: #f0ede6;
+      padding: 0.7rem 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    /* ── Venue ── */
+    .venue-details {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .venue-details strong { color: var(--ink); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 2.5rem 0;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      body { font-size: 16px; }
+      .meta-line { flex-direction: column; align-items: center; gap: 0.5rem; }
+      nav ul { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding: 0 1rem; }
+      nav a { white-space: nowrap; }
+    }
+
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <div class="container">
+
+    <!-- SVG Logo Mark -->
+    <svg class="logo-mark" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Colloquium logo mark">
+      <!-- Outer circle — represents the colloquium gathering -->
+      <circle cx="60" cy="60" r="56" stroke="#2a5ca8" stroke-width="2.5"/>
+      <!-- Grid / proof sheet — abstract formal methods / logic grid -->
+      <line x1="30" y1="40" x2="90" y2="40" stroke="#2a5ca8" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <line x1="30" y1="55" x2="90" y2="55" stroke="#2a5ca8" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <line x1="30" y1="70" x2="90" y2="70" stroke="#2a5ca8" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <line x1="30" y1="85" x2="90" y2="85" stroke="#2a5ca8" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <!-- Stylized lambda / proof symbol -->
+      <text x="50" y="80" font-family="serif" font-size="38" fill="#5e9e6e" font-weight="bold" opacity="0.85">λ</text>
+      <!-- Bracket notation — formal spec -->
+      <text x="26" y="75" font-family="monospace" font-size="28" fill="#2a5ca8" font-weight="300">[</text>
+      <text x="86" y="75" font-family="monospace" font-size="28" fill="#2a5ca8" font-weight="300">]</text>
+    </svg>
+
+    <p class="workshop-label">GTIIT · Shantou, China · 2025</p>
+    <h1>Colloquium on the Foundations of Modern Software Engineering</h1>
+    <div class="meta-line">
+      <span>📅 October 30 – November 1, 2025</span>
+      <span>📍 GTIIT, Shantou, Guangdong, China</span>
+    </div>
+  </div>
+</header>
+
+<!-- ── Sticky Nav ── -->
+<nav aria-label="Page sections">
+  <div class="container">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#speakers">Speakers</a></li>
+      <li><a href="#program">Program</a></li>
+      <li><a href="#tutorials">Tutorials</a></li>
+      <li><a href="#venue">Venue</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── About ── -->
+<section id="about">
+  <div class="container">
+    <h2>About the Colloquium</h2>
+    <p class="about-intro">
+      A three-day gathering exploring the mathematical and logical foundations that underpin the way we build reliable, correct software.
+    </p>
+    <p>
+      The GTIIT Colloquium on the Foundations of Modern Software Engineering brings together leading researchers to discuss recent advances in software engineering with a particular focus on its deep connections to mathematics and formal reasoning. The event is designed as a forum for graduate and undergraduate students at GTIIT to engage directly with the research community.
+    </p>
+    <p>
+      Topics span the theoretical and practical foundations of the discipline — including program analysis, software testing and verification, formal specification, and automated reasoning — and aim to illuminate the synergy between rigorous mathematical thinking and the challenges of building real-world software systems.
+    </p>
+    <p>
+      Attendance is free and open to all GTIIT students and faculty.
+    </p>
+  </div>
+</section>
+
+<!-- ── Speakers ── -->
+<section id="speakers">
+  <div class="container">
+    <h2>Confirmed Speakers</h2>
+    <div class="speaker-grid">
+
+      <div class="speaker-card">
+        <p class="name">Nazareno Aguirre</p>
+        <p class="affiliation">GTIIT / Universidad Nacional de Río Cuarto</p>
+        <span class="organizer-tag">Organizer</span>
+      </div>
+
+      <div class="speaker-card">
+        <p class="name">Diego Garbervetsky</p>
+        <p class="affiliation">GTIIT / Universidad de Buenos Aires</p>
+        <span class="organizer-tag">Organizer</span>
+      </div>
+
+      <div class="speaker-card">
+        <p class="name">Renzo Degiovanni</p>
+        <p class="affiliation">LIST, Luxembourg</p>
+      </div>
+
+      <div class="speaker-card">
+        <p class="name">Sebastian Uchitel</p>
+        <p class="affiliation">Universidad de Buenos Aires &amp; Imperial College London</p>
+      </div>
+
+      <div class="speaker-card">
+        <p class="name">Mike Papadakis</p>
+        <p class="affiliation">SnT, University of Luxembourg</p>
+      </div>
+
+      <div class="speaker-card">
+        <p class="name">Man Zhang</p>
+        <p class="affiliation">Beihang University</p>
+      </div>
+
+      <div class="speaker-card">
+        <p class="name">Tao Yue</p>
+        <p class="affiliation">Beihang University</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Program ── -->
+<section id="program">
+  <div class="container">
+    <h2>Program</h2>
+    <p>The detailed program is under preparation. Talks and sessions will be announced as they are confirmed.</p>
+
+    <div class="schedule-block" style="margin-top: 2rem;">
+      <div class="day-label">Thursday, October 30</div>
+      <div class="tba">Sessions to be announced</div>
+    </div>
+
+    <div class="schedule-block">
+      <div class="day-label">Friday, October 31</div>
+      <div class="tba">Sessions to be announced</div>
+    </div>
+
+    <div class="schedule-block">
+      <div class="day-label">Saturday, November 1</div>
+      <div class="tba">Sessions to be announced</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Tutorials ── -->
+<section id="tutorials">
+  <div class="container">
+    <h2>Pre-Colloquium Tutorials</h2>
+    <p>
+      The weekend before the main colloquium — <strong>Saturday and Sunday, October 25–26</strong> — will feature a series of introductory tutorials aimed at undergraduate and graduate students with no prior background in formal software engineering.
+    </p>
+    <p>
+      Tutorials will be delivered by <strong>Nazareno Aguirre</strong> and <strong>Diego Garbervetsky</strong>, together with researchers at GTIIT. They are designed to prepare students to engage fully with the colloquium talks and to provide hands-on exposure to the tools and ideas discussed during the main event.
+    </p>
+    <p style="color: var(--muted); font-family: 'Inter', sans-serif; font-size: 0.9rem;">
+      Tutorial topics and schedule to be announced.
+    </p>
+  </div>
+</section>
+
+<!-- ── Venue ── -->
+<section id="venue">
+  <div class="container">
+    <h2>Venue</h2>
+    <p class="venue-details">
+      <strong>Guangdong Technion – Israel Institute of Technology (GTIIT)</strong><br>
+      Shantou, Guangdong, China
+    </p>
+    <p style="margin-top: 1rem;">
+      GTIIT is a joint Sino-Israeli research university, offering a rigorous STEM education modelled on the Technion – Israel Institute of Technology. The campus is located in Shantou, a coastal city in eastern Guangdong Province.
+    </p>
+    <p>
+      Travel and accommodation information will be added closer to the event.
+    </p>
+  </div>
+</section>
+
+<!-- ── Contact ── -->
+<section id="contact">
+  <div class="container">
+    <h2>Contact</h2>
+    <p>
+      For enquiries about the colloquium, please contact the organizers:
+    </p>
+    <p style="margin-top: 0.8rem;">
+      <strong>Nazareno Aguirre</strong> — <a href="mailto:naguirre@gtiit.edu.cn" style="color: var(--accent);">naguirre@gtiit.edu.cn</a><br>
+      <strong>Diego Garbervetsky</strong> — <a href="mailto:dgarbervetsky@gtiit.edu.cn" style="color: var(--accent);">dgarbervetsky@gtiit.edu.cn</a>
+    </p>
+    <p style="margin-top: 1rem; font-family: 'Inter', sans-serif; font-size: 0.88rem; color: var(--muted);">
+      (Update email addresses above before publishing if needed.)
+    </p>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="container">
+    <p>GTIIT Colloquium on the Foundations of Modern Software Engineering · Shantou, China · October 30 – November 1, 2025</p>
+    <p style="margin-top: 0.4rem;">Hosted at <a href="https://www.gtiit.edu.cn" target="_blank" rel="noopener">Guangdong Technion – Israel Institute of Technology</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
