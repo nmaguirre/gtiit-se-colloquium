@@ -179,6 +179,54 @@
       margin-top: 0.5rem;
     }
 
+    /* ── Speaker talk details ── */
+    .speaker-card .talk-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--ink);
+      margin-top: 0.8rem;
+      margin-bottom: 0.3rem;
+    }
+    .speaker-card details {
+      margin-top: 0.6rem;
+    }
+    .speaker-card summary {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--accent);
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+    }
+    .speaker-card summary::-webkit-details-marker { display: none; }
+    .speaker-card summary::before {
+      content: '▸ ';
+      font-size: 0.7rem;
+    }
+    .speaker-card details[open] summary::before { content: '▾ '; }
+    .speaker-card .abstract,
+    .speaker-card .bio {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.80rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-top: 0.5rem;
+      max-width: 100%;
+    }
+    .speaker-card .detail-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-top: 0.8rem;
+      margin-bottom: 0.2rem;
+    }
+
     /* ── Program / Schedule ── */
     .schedule-block { margin-bottom: 2rem; }
     .schedule-block h3 {
@@ -353,7 +401,7 @@
   <div class="container">
     <h2>About the Colloquium</h2>
     <p class="about-intro">
-      A two-day gathering on automated software engineering — from the analysis and generation of code to the formal validation and verification of models and systems.
+      A three-day gathering on automated software engineering — from the analysis and generation of code to the formal validation and verification of models and systems.
     </p>
     <p>
       The GTIIT Colloquium on the Foundations of Modern Software Engineering brings together leading researchers to discuss recent advances in automated software engineering. The event is designed as a forum for graduate and undergraduate students at GTIIT to engage directly with the research community and to witness first-hand how rigour underpins the tools and techniques that modern software engineering relies on.
@@ -370,12 +418,84 @@
 <!-- ── Speakers ── -->
 <section id="speakers">
   <div class="container">
-    <h2>Confirmed Speakers</h2>
+    <h2>Invited Keynote Speakers</h2>
+    <div class="speaker-grid">
+
+      <!-- Jialun Cao -->
+      <div class="speaker-card">
+        <p class="name">Jialun Cao</p>
+        <p class="affiliation">The Hong Kong University of Science and Technology</p>
+        <details>
+          <summary>Abstract &amp; Bio</summary>
+          <p class="detail-label">Talk</p>
+          <p class="talk-title">To be announced</p>
+        </details>
+      </div>
+
+      <!-- Yepang Liu -->
+      <div class="speaker-card">
+        <p class="name"><a href="https://yepangliu.github.io" target="_blank" rel="noopener" style="color: var(--ink); text-decoration: none;">Yepang Liu</a></p>
+        <p class="affiliation">Southern University of Science and Technology</p>
+        <p class="talk-title">Intelligent GUI Testing: An Overview and Our Recent Research</p>
+        <details>
+          <summary>Abstract &amp; Bio</summary>
+          <p class="detail-label">Abstract</p>
+          <p class="abstract">Graphical user interfaces (GUIs) provide users with direct access to software functionality. By simulating user interactions, GUI testing validates interface rendering, widget behavior, business workflows, cross-platform compatibility, and UI responsiveness. It plays a crucial role in ensuring a high-quality user experience and supporting regression testing across software releases. However, GUI testing faces substantial challenges in practice, including vast UI state spaces, complex interaction semantics, difficulties in achieving adequate test coverage, and high test script maintenance costs. This talk introduces the basic concepts and core challenges of GUI testing, reviews major technical approaches and representative tools, and presents our recent research on intelligent GUI testing.</p>
+          <p class="detail-label">Bio</p>
+          <p class="bio">Yepang Liu is a tenured Associate Professor in the Department of Computer Science and Engineering and the Director of the Trustworthy Software Center of the Research Institute of Trustworthy Autonomous Systems at Southern University of Science and Technology (SUSTech). He received his bachelor&rsquo;s degree from Nanjing University in 2010 and his Ph.D. from the Hong Kong University of Science and Technology in 2015. His research focuses on intelligent software engineering and trustworthy AI systems. He has published 118 papers in international conferences and journals, and has received four ACM SIGSOFT Distinguished Paper/Artifact Awards. The software testing and analysis tools developed by his team have helped uncover more than 2,000 previously unknown defects in open-source projects and have been deployed in large companies such as Huawei and Tencent. He actively serves on the program/organizing committees for leading conferences in software engineering, including ICSE, FSE, ASE, and ISSTA, and on the editorial boards of Empirical Software Engineering, Frontiers of Computer Science, and Journal of Computer Science and Technology.</p>
+        </details>
+      </div>
+
+      <!-- Sebastian Uchitel -->
+      <div class="speaker-card">
+        <p class="name"><a href="https://suchitel.github.io" target="_blank" rel="noopener" style="color: var(--ink); text-decoration: none;">Sebastian Uchitel</a></p>
+        <p class="affiliation">Universidad de Buenos Aires &amp; Imperial College London, UK</p>
+        <p class="talk-title">Discrete Event Controller Synthesis for Adaptive Systems</p>
+        <details>
+          <summary>Abstract &amp; Bio</summary>
+          <p class="detail-label">Abstract</p>
+          <p class="abstract">Adaptation is often defined as the ability of systems to alter at runtime their behaviour in response to changes in their environment, capabilities and goals that were unforeseen at design time. I will discuss why I believe one interesting route to achieving adaptation is to endow systems with the capability of synthesising at runtime discrete event controllers. I will provide an overview of the work we have done in this direction and some of the challenges that remain, covering software architectures, modelling and learning approaches for defining novel discrete event control problems, and algorithms to solve them.</p>
+          <p class="detail-label">Bio</p>
+          <p class="bio">Sebastian Uchitel is a Professor at Universidad de Buenos Aires (Argentina), Principal Investigator at CONICET (Argentina), holds a Readership at Imperial College London (UK), is an affiliated researcher at Universidad de San Andr&eacute;s (Argentina) and a visiting professor at the National Institute of Informatics (Japan). His research interests are in behaviour modelling, analysis and synthesis applied to requirements engineering, software architecture and design, and in particular the use of synthesis at runtime to support system adaptation. He was Editor-in-Chief of the IEEE Transactions on Software Engineering and has held editorial responsibilities in Communications of the ACM, the Requirements Engineering Journal and the Science of Computer Programming Journal. He was program co-chair of ASE&rsquo;06 and ICSE&rsquo;10, and General Chair of ICSE&rsquo;17. He has been distinguished with the Philip Leverhulme Prize, the Konex Foundation Prize and the Houssay Prize, and is a member of the Argentine National Academy of Exact, Physical and Natural Sciences.</p>
+        </details>
+      </div>
+
+      <!-- Tao Yue -->
+      <div class="speaker-card">
+        <p class="name"><a href="https://yue-tao.github.io" target="_blank" rel="noopener" style="color: var(--ink); text-decoration: none;">Tao Yue</a></p>
+        <p class="affiliation">Beihang University</p>
+        <p class="talk-title">LLMs for Model-Driven Engineering</p>
+        <details>
+          <summary>Abstract &amp; Bio</summary>
+          <p class="detail-label">Abstract</p>
+          <p class="abstract">Large Language Models (LLMs) can support Model-Driven Engineering (MDE) by translating natural language into models and assisting modeling activities. This talk asks why models still matter in the LLM era and reviews the literature and recent advances in using LLMs to support MDE.</p>
+          <p class="detail-label">Bio</p>
+          <p class="bio">Tao Yue is a full professor at Beihang University. Her main research interests include model-driven engineering, uncertainty-aware software engineering, and quantum software engineering. She has published more than 180 high-quality research papers in the field of software engineering. She is Associate Editor-in-Chief of IEEE Transactions on Software Engineering (TSE) and on the editorial boards of Empirical Software Engineering (EMSE) and Software and System Modeling (SoSyM).</p>
+        </details>
+      </div>
+
+      <!-- Man Zhang -->
+      <div class="speaker-card">
+        <p class="name">Man Zhang</p>
+        <p class="affiliation">Beihang University</p>
+        <p class="talk-title">Modeling Uncertainty with SysML v2</p>
+        <details>
+          <summary>Abstract &amp; Bio</summary>
+          <p class="detail-label">Abstract</p>
+          <p class="abstract">Uncertainty is inherent in modern complex systems, particularly cyber-physical and autonomous systems operating in dynamic and unpredictable environments. Model-based systems engineering (MBSE) provides a systematic approach to specifying, analyzing, and understanding such systems. To support reliable system design and analysis, it is essential to explicitly capture and characterize uncertainties within system models. In this talk, we introduce PSUM-SysMLv2, an extension of SysML v2 that integrates the OMG standard Precise Semantics for Uncertainty Modeling (PSUM). We present how uncertainties can be specified and characterized in SysML v2 models, including their sources, types, and potential effects on system behavior. We also introduce a methodology for applying PSUM-SysMLv2 and demonstrate its applicability through case studies.</p>
+          <p class="detail-label">Bio</p>
+          <p class="bio">Man Zhang is an Associate Professor at Beihang University. Her research focuses on AI-based and model-based approaches to the verification and validation of complex systems, such as cyber-physical systems, autonomous driving systems, and microservices.</p>
+        </details>
+      </div>
+
+    </div>
+
+    <h2 style="margin-top: 2.5rem;">Organizers</h2>
     <div class="speaker-grid">
 
       <div class="speaker-card">
         <p class="name"><a href="https://nmaguirre.github.io" target="_blank" rel="noopener" style="color: var(--ink); text-decoration: none;">Nazareno Aguirre</a></p>
-        <p class="affiliation">GTIIT / Universidad Nacional de Río Cuarto</p>
+        <p class="affiliation">GTIIT / Universidad Nacional de R&iacute;o Cuarto</p>
         <span class="organizer-tag">Organizer</span>
       </div>
 
@@ -385,39 +505,8 @@
         <span class="organizer-tag">Organizer</span>
       </div>
 
-      <div class="speaker-card">
-        <p class="name"><a href="https://yepangliu.github.io" target="_blank" rel="noopener" style="color: var(--ink); text-decoration: none;">Yepang Liu</a></p>
-        <p class="affiliation">Southern University of Science and Technology</p>
-      </div>
-
-      <div class="speaker-card">
-        <p class="name"><a href="https://suchitel.github.io" target="_blank" rel="noopener" style="color: var(--ink); text-decoration: none;">Sebastian Uchitel</a></p>
-        <p class="affiliation">Universidad de Buenos Aires &amp; Imperial College London</p>
-      </div>
-
-      <div class="speaker-card">
-        <p class="name"><a href="https://jialuncao.github.io" target="_blank" rel="noopener" style="color: var(--ink); text-decoration: none;">Jialun Cao</a></p>
-        <p class="affiliation">The Hong Kong University of Science and Technology</p>
-      </div>
-
-      <div class="speaker-card">
-        <p class="name">Man Zhang</p>
-        <p class="affiliation">Beihang University</p>
-      </div>
-
-      <div class="speaker-card">
-        <p class="name"><a href="https://yue-tao.github.io" target="_blank" rel="noopener" style="color: var(--ink); text-decoration: none;">Tao Yue</a></p>
-        <p class="affiliation">Beihang University</p>
-      </div>
-
-      <div class="speaker-card">
-        <p class="name">Hernán Melgratti</p>
-        <p class="affiliation">Universidad de Buenos Aires &amp; GTIIT</p>
-      </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
 <!-- ── Program ── -->
 <section id="program">
@@ -447,6 +536,9 @@
     </p>
     <p style="margin-top: 1rem;">
       GTIIT is a research university offering a rigorous STEM education modelled on the Technion – Israel Institute of Technology. The campus is located in Shantou, a coastal city in eastern Guangdong Province.
+    </p>
+    <p>
+      Travel and accommodation information will be added closer to the event.
     </p>
   </div>
 </section>
