@@ -254,6 +254,32 @@
       margin-bottom: 0.4rem;
     }
 
+    /* ── Program table ── */
+    .program-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      margin-top: 0.8rem;
+    }
+    .program-table tr { border-bottom: 1px solid var(--rule); }
+    .program-table tr:last-child { border-bottom: none; }
+    .program-table td {
+      padding: 0.55rem 0.6rem;
+      vertical-align: top;
+    }
+    .program-table .time {
+      white-space: nowrap;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      width: 5.5rem;
+    }
+    .program-table .event { color: var(--ink); }
+    .program-table .event strong { font-weight: 600; }
+    .program-table .event em { color: var(--muted); font-style: italic; }
+    .program-table tr.break td { background: #f0ede6; color: var(--muted); }
+    .program-table tr.highlight td { background: #eaf2fb; }
+
     /* ── Venue ── */
     .venue-details {
       font-family: 'Inter', sans-serif;
@@ -512,17 +538,109 @@
 <section id="program">
   <div class="container">
     <h2>Program</h2>
-    <p>The detailed program is under preparation. Talks and sessions will be announced as they are confirmed. Below is the current outline.</p>
 
+    <!-- Friday -->
     <div class="schedule-block" style="margin-top: 2rem;">
       <div class="day-label">Friday, October 30</div>
-      <div class="tba">Sessions to be announced</div>
+      <table class="program-table">
+        <tr class="highlight">
+          <td class="time">18:30</td>
+          <td class="event"><strong>Opening</strong></td>
+        </tr>
+        <tr>
+          <td class="time">18:45</td>
+          <td class="event">
+            <strong>Modeling Uncertainty with SysML v2</strong><br>
+            <em>Man Zhang</em> &mdash; Beihang University
+            <br><em style="font-size:0.82rem;">30 min + 10 min questions</em>
+          </td>
+        </tr>
+        <tr class="break">
+          <td class="time">19:25</td>
+          <td class="event">Day closing</td>
+        </tr>
+        <tr class="break">
+          <td class="time">19:30</td>
+          <td class="event">Refreshments</td>
+        </tr>
+      </table>
     </div>
 
+    <!-- Saturday -->
     <div class="schedule-block">
       <div class="day-label">Saturday, October 31</div>
-      <div class="tba">Sessions to be announced</div>
+      <table class="program-table">
+        <tr class="highlight">
+          <td class="time">9:30</td>
+          <td class="event"><strong>Opening &amp; Presentation</strong></td>
+        </tr>
+        <tr>
+          <td class="time">9:35</td>
+          <td class="event">
+            <strong>LLMs for Model-Driven Engineering</strong><br>
+            <em>Tao Yue</em> &mdash; Beihang University
+            <br><em style="font-size:0.82rem;">30 min + 10 min questions</em>
+          </td>
+        </tr>
+        <tr class="break">
+          <td class="time">10:15</td>
+          <td class="event">Coffee break</td>
+        </tr>
+        <tr>
+          <td class="time">10:40</td>
+          <td class="event">
+            <strong>PhD Student Talk</strong><br>
+            <em>To be announced</em>
+            <br><em style="font-size:0.82rem;">20 min + 5 min questions</em>
+          </td>
+        </tr>
+        <tr>
+          <td class="time">11:05</td>
+          <td class="event">
+            <strong>PhD Student Talk</strong><br>
+            <em>To be announced</em>
+            <br><em style="font-size:0.82rem;">20 min + 5 min questions</em>
+          </td>
+        </tr>
+        <tr class="break">
+          <td class="time">11:30</td>
+          <td class="event">Lunch break</td>
+        </tr>
+        <tr>
+          <td class="time">14:30</td>
+          <td class="event">
+            <strong>Intelligent GUI Testing: An Overview and Our Recent Research</strong><br>
+            <em>Yepang Liu</em> &mdash; Southern University of Science and Technology
+            <br><em style="font-size:0.82rem;">30 min + 10 min questions</em>
+          </td>
+        </tr>
+        <tr>
+          <td class="time">15:10</td>
+          <td class="event">
+            <strong>Talk by Jialun Cao</strong><br>
+            <em>Jialun Cao</em> &mdash; Hong Kong University of Science and Technology
+            <br><em style="font-size:0.82rem;">30 min + 10 min questions</em>
+          </td>
+        </tr>
+        <tr class="break">
+          <td class="time">15:50</td>
+          <td class="event">Coffee break</td>
+        </tr>
+        <tr>
+          <td class="time">16:15</td>
+          <td class="event">
+            <strong>Discrete Event Controller Synthesis for Adaptive Systems</strong><br>
+            <em>Sebastian Uchitel</em> &mdash; Universidad de Buenos Aires &amp; Imperial College London
+            <br><em style="font-size:0.82rem;">30 min + 10 min questions</em>
+          </td>
+        </tr>
+        <tr class="highlight">
+          <td class="time">16:55</td>
+          <td class="event"><strong>Closing</strong></td>
+        </tr>
+      </table>
     </div>
+
   </div>
 </section>
 
