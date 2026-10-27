@@ -566,7 +566,7 @@
         <details>
           <summary>Bio</summary>
           <p class="detail-label">Bio</p>
-          <p class="bio">Nazareno Aguirre is a Full Professor at the University of Rio Cuarto, Argentina, and a Research Scientist at Argentina&rsquo;s National Council for Scientific and Technical Research (CONICET). He is also a Visiting Professor at Guangdong Technion Israel Institute of Technology, Shantou, China. His current research interests relate to the problem of guaranteeing software correctness and helping produce quality software, mostly via techniques for program specification, automated testing, and program verification, with formal underpinnings. His research has been published in top-tier software engineering conferences and journals. He regularly serves on program committees of premier software engineering conferences and is currently an Associate Editor of IEEE Transactions on Software Engineering.</p>
+          <p class="bio">Nazareno Aguirre is a Full Professor at the University of Rio Cuarto, Argentina, and a Principal Researcher at Argentina&rsquo;s National Council for Scientific and Technical Research (CONICET). He is also a Visiting Professor at Guangdong Technion Israel Institute of Technology, Shantou, China. His current research interests relate to the problem of guaranteeing software correctness and helping produce quality software, mostly via techniques for program specification, automated testing, and program verification, with formal underpinnings. His research has been published in top-tier software engineering conferences and journals. He regularly serves on program committees of premier software engineering conferences and is currently an Associate Editor of IEEE Transactions on Software Engineering.</p>
         </details>
       </div>
 
@@ -606,6 +606,13 @@
             <strong>Modeling Uncertainty with SysML v2</strong><br>
             <em>Man Zhang</em> &mdash; Beihang University
             <br><em style="font-size:0.82rem;">30 min + 10 min questions</em>
+            <details style="margin-top:0.4rem;">
+              <summary>Abstract &amp; Bio</summary>
+              <p class="detail-label">Abstract</p>
+              <p class="abstract">Uncertainty is inherent in modern complex systems, particularly cyber-physical and autonomous systems operating in dynamic and unpredictable environments. Model-based systems engineering (MBSE) provides a systematic approach to specifying, analyzing, and understanding such systems. To support reliable system design and analysis, it is essential to explicitly capture and characterize uncertainties within system models. In this talk, we introduce PSUM-SysMLv2, an extension of SysML v2 that integrates the OMG standard Precise Semantics for Uncertainty Modeling (PSUM). We present how uncertainties can be specified and characterized in SysML v2 models, including their sources, types, and potential effects on system behavior. We also introduce a methodology for applying PSUM-SysMLv2 and demonstrate its applicability through case studies.</p>
+              <p class="detail-label">Bio</p>
+              <p class="bio">Man Zhang is an Associate Professor at Beihang University. Her research focuses on AI-based and model-based approaches to the verification and validation of complex systems, such as cyber-physical systems, autonomous driving systems, and microservices.</p>
+            </details>
           </td>
         </tr>
         <tr class="break">
@@ -633,6 +640,13 @@
             <strong>Intelligent GUI Testing: An Overview and Our Recent Research</strong><br>
             <em>Yepang Liu</em> &mdash; Southern University of Science and Technology
             <br><em style="font-size:0.82rem;">30 min + 10 min questions</em>
+            <details style="margin-top:0.4rem;">
+              <summary>Abstract &amp; Bio</summary>
+              <p class="detail-label">Abstract</p>
+              <p class="abstract">Graphical user interfaces (GUIs) provide users with direct access to software functionality. By simulating user interactions, GUI testing validates interface rendering, widget behavior, business workflows, cross-platform compatibility, and UI responsiveness. It plays a crucial role in ensuring a high-quality user experience and supporting regression testing across software releases. However, GUI testing faces substantial challenges in practice, including vast UI state spaces, complex interaction semantics, difficulties in achieving adequate test coverage, and high test script maintenance costs. This talk introduces the basic concepts and core challenges of GUI testing, reviews major technical approaches and representative tools, and presents our recent research on intelligent GUI testing.</p>
+              <p class="detail-label">Bio</p>
+              <p class="bio">Yepang Liu is a tenured Associate Professor in the Department of Computer Science and Engineering and the Director of the Trustworthy Software Center of the Research Institute of Trustworthy Autonomous Systems at Southern University of Science and Technology (SUSTech). He received his bachelor&rsquo;s degree from Nanjing University in 2010 and his Ph.D. from the Hong Kong University of Science and Technology in 2015. His research focuses on intelligent software engineering and trustworthy AI systems. He has published 118 papers in international conferences and journals, and has received four ACM SIGSOFT Distinguished Paper/Artifact Awards. The software testing and analysis tools developed by his team have helped uncover more than 2,000 previously unknown defects in open-source projects and have been deployed in large companies such as Huawei and Tencent. He actively serves on the program/organizing committees for leading conferences in software engineering, including ICSE, FSE, ASE, and ISSTA, and on the editorial boards of Empirical Software Engineering, Frontiers of Computer Science, and Journal of Computer Science and Technology.</p>
+            </details>
           </td>
         </tr>
         <tr class="break">
@@ -661,8 +675,18 @@
         <tr>
           <td class="time">14:30</td>
           <td class="event">
-            <strong>Talk to be announced</strong><br>
-            <em style="font-size:0.82rem;">30 min + 10 min questions</em>
+            <strong>Abstraction-Aware Inference of Metamorphic Relations</strong><br>
+            <em>Nazareno Aguirre</em> &mdash; GTIIT / Universidad Nacional de R&iacute;o Cuarto
+            <br><em style="font-size:0.82rem;">30 min + 10 min questions</em>
+            <details style="margin-top:0.4rem;">
+              <summary>Abstract</summary>
+              <p class="detail-label">Abstract</p>
+              <p class="abstract">A fundamental challenge in software testing is the <em>oracle problem</em>: how do we decide whether the output of a program under test is correct? Metamorphic testing addresses this by identifying <em>metamorphic relations</em> — properties that relate different executions of the same software, providing a weaker but highly effective form of test oracle that applies to entire families of executions at once. For example, a sorting routine should return the same result regardless of the order in which elements were inserted; such a relation can catch bugs without requiring a complete specification of the intended output.</p>
+              <p class="abstract">Identifying suitable metamorphic relations for a given piece of software is itself a hard and largely manual task. This talk presents MemoRIA, an approach to automatically infer metamorphic relations in the form of conditional equivalences between method sequences. The key idea is to first build a compact behavioural model of the software — an <em>Enabledness-Preserving Abstraction</em> (EPA), a state machine that captures which operations are available in each object state — and then use that model to guide a grammar-based fuzzer in generating candidate relations that are consistent with the software's protocol by construction. Candidate relations are validated through dynamic analysis, and a SAT-based reduction step removes redundant ones, yielding a concise set of properties for the engineer to inspect.</p>
+              <p class="abstract">The talk introduces the core concepts of metamorphic testing, state machine abstractions, grammar-based fuzzing, and dynamic analysis, and shows how they combine into a practical automated pipeline for inferring useful software properties.</p>
+              <p class="detail-label">Bio</p>
+              <p class="bio">Nazareno Aguirre is a Full Professor at the University of Rio Cuarto, Argentina, and a Principal Researcher at Argentina&rsquo;s National Council for Scientific and Technical Research (CONICET). He is also a Visiting Professor at Guangdong Technion Israel Institute of Technology, Shantou, China. His current research interests relate to the problem of guaranteeing software correctness and helping produce quality software, mostly via techniques for program specification, automated testing, and program verification, with formal underpinnings. His research has been published in top-tier software engineering conferences and journals. He regularly serves on program committees of premier software engineering conferences and is currently an Associate Editor of IEEE Transactions on Software Engineering.</p>
+            </details>
           </td>
         </tr>
         <tr>
@@ -671,6 +695,15 @@
             <strong>Unveiling the Power and Limits of Agentic Workflows in Formal Specification Generation</strong><br>
             <em>Jialun Cao</em> &mdash; Hong Kong University of Science and Technology
             <br><em style="font-size:0.82rem;">30 min + 10 min questions</em>
+            <details style="margin-top:0.4rem;">
+              <summary>Abstract &amp; Bio</summary>
+              <p class="detail-label">Abstract</p>
+              <p class="abstract">With the rapid development of Large Language Models (LLMs), Reasoning Models, and AI Agents, emerging technologies such as Agentic Workflows, Harnesses, and Skills are reshaping how AI systems tackle complex tasks, while opening up new possibilities for formal specification generation and program verification. This talk explores the evolution from AI-assisted to agentic specification generation, presenting our research and initial explorations into how AI can participate more actively in the formal verification process.</p>
+              <p class="abstract">The talk will first review recent approaches to using LLMs to automatically generate formal specifications, and discuss how specifications can be checked and iteratively refined through static analysis, testing, and verifier feedback. We will then introduce our initial explorations of Agent orchestration, Harnesses, Skills, and Jev, investigating how agentic workflows can move beyond one-shot specification generation toward systems that understand the current verification state, select appropriate next actions, and continuously improve specifications based on feedback.</p>
+              <p class="abstract">Beyond their potential, we will also examine the limits of agentic workflows in formal specification generation, including challenges in identifying what should be specified, determining whether a generated specification is sufficiently precise and useful, and ensuring that iterative refinement does not lead to overly weak or unintended specifications. Finally, we will discuss the prospects of project-level Formal Verification Agents, and explore how agentic approaches may reshape the workflow of formal verification as AI increasingly takes part in specification generation, planning, and verification decisions.</p>
+              <p class="detail-label">Bio</p>
+              <p class="bio">Jialun Cao is a Research Assistant Professor at the Hong Kong University of Science and Technology and will soon join the Department of Computing at Imperial College London as an Assistant Professor. Her research lies at the intersection of AI, Software Engineering and Formal Methods, with papers published at ICSE, FSE, ASE, ISSTA, CAV, ACL, ICML, USENIX Security, and TOSEM. She serves on the program committees of ICSE, FSE, ISSTA, ASE and OOPSLA. Her work has received a Distinguished Paper Award (2024), the ACM SIGSOFT Distinguished Doctoral Dissertation Award (2025), and the Young Scientist Award in Engineering Sciences (2025).</p>
+            </details>
           </td>
         </tr>
         <tr class="break">
@@ -683,6 +716,13 @@
             <strong>Discrete Event Controller Synthesis for Adaptive Systems</strong><br>
             <em>Sebastian Uchitel</em> &mdash; Universidad de Buenos Aires &amp; Imperial College London
             <br><em style="font-size:0.82rem;">30 min + 10 min questions</em>
+            <details style="margin-top:0.4rem;">
+              <summary>Abstract &amp; Bio</summary>
+              <p class="detail-label">Abstract</p>
+              <p class="abstract">Adaptation is often defined as the ability of systems to alter at runtime their behaviour in response to changes in their environment, capabilities and goals that were unforeseen at design time. I will discuss why I believe one interesting route to achieving adaptation is to endow systems with the capability of synthesising at runtime discrete event controllers. I will provide an overview of the work we have done in this direction and some of the challenges that remain, covering software architectures, modelling and learning approaches for defining novel discrete event control problems, and algorithms to solve them.</p>
+              <p class="detail-label">Bio</p>
+              <p class="bio">Sebastian Uchitel is a Professor at Universidad de Buenos Aires (Argentina), Principal Investigator at CONICET (Argentina), holds a Readership at Imperial College London (UK), is an affiliated researcher at Universidad de San Andr&eacute;s (Argentina) and a visiting professor at the National Institute of Informatics (Japan). His research interests are in behaviour modelling, analysis and synthesis applied to requirements engineering, software architecture and design, and in particular the use of synthesis at runtime to support system adaptation. He was Editor-in-Chief of the IEEE Transactions on Software Engineering and has held editorial responsibilities in Communications of the ACM, the Requirements Engineering Journal and the Science of Computer Programming Journal. He was program co-chair of ASE&rsquo;06 and ICSE&rsquo;10, and General Chair of ICSE&rsquo;17. He has been distinguished with the Philip Leverhulme Prize, the Konex Foundation Prize and the Houssay Prize, and is a member of the Argentine National Academy of Exact, Physical and Natural Sciences.</p>
+            </details>
           </td>
         </tr>
         <tr class="highlight">
