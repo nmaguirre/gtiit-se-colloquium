@@ -1,0 +1,25 @@
+// Written by make_gallery.py on 2026-11-04. You may edit captions and album names by hand.
+window.PHOTOS = [
+  {"src": "photos/web/photo-001.jpg", "thumb": "photos/thumbs/photo-001.jpg", "w": 1800, "h": 1013, "album": "Friday, October 30", "caption": ""},
+  {"src": "photos/web/photo-002.jpg", "thumb": "photos/thumbs/photo-002.jpg", "w": 1800, "h": 1013, "album": "Friday, October 30", "caption": ""},
+  {"src": "photos/web/photo-003.jpg", "thumb": "photos/thumbs/photo-003.jpg", "w": 1012, "h": 1800, "album": "Friday, October 30", "caption": ""},
+  {"src": "photos/web/photo-004.jpg", "thumb": "photos/thumbs/photo-004.jpg", "w": 1800, "h": 1013, "album": "Friday, October 30", "caption": ""},
+  {"src": "photos/web/photo-005.jpg", "thumb": "photos/thumbs/photo-005.jpg", "w": 1800, "h": 1013, "album": "Friday, October 30", "caption": ""},
+  {"src": "photos/web/photo-006.jpg", "thumb": "photos/thumbs/photo-006.jpg", "w": 1800, "h": 1013, "album": "Friday, October 30", "caption": ""},
+  {"src": "photos/web/photo-007.jpg", "thumb": "photos/thumbs/photo-007.jpg", "w": 1800, "h": 1198, "album": "Saturday, October 31", "caption": ""},
+  {"src": "photos/web/photo-008.jpg", "thumb": "photos/thumbs/photo-008.jpg", "w": 1800, "h": 1200, "album": "Saturday, October 31", "caption": ""},
+  {"src": "photos/web/photo-009.jpg", "thumb": "photos/thumbs/photo-009.jpg", "w": 1800, "h": 1198, "album": "Saturday, October 31", "caption": ""},
+  {"src": "photos/web/photo-010.jpg", "thumb": "photos/thumbs/photo-010.jpg", "w": 1800, "h": 1198, "album": "Saturday, October 31", "caption": ""},
+  {"src": "photos/web/photo-011.jpg", "thumb": "photos/thumbs/photo-011.jpg", "w": 1800, "h": 1198, "album": "Saturday, October 31", "caption": ""},
+  {"src": "photos/web/photo-012.jpg", "thumb": "photos/thumbs/photo-012.jpg", "w": 1800, "h": 1198, "album": "Saturday, October 31", "caption": ""},
+  {"src": "photos/web/photo-013.jpg", "thumb": "photos/thumbs/photo-013.jpg", "w": 1800, "h": 1198, "album": "Saturday, October 31", "caption": ""},
+  {"src": "photos/web/photo-014.jpg", "thumb": "photos/thumbs/photo-014.jpg", "w": 1800, "h": 1198, "album": "Saturday, October 31", "caption": ""},
+  {"src": "photos/web/photo-015.jpg", "thumb": "photos/thumbs/photo-015.jpg", "w": 1800, "h": 1198, "album": "Saturday, October 31", "caption": ""},
+  {"src": "photos/web/photo-016.jpg", "thumb": "photos/thumbs/photo-016.jpg", "w": 1800, "h": 1198, "album": "Saturday, October 31", "caption": ""},
+  {"src": "photos/web/photo-017.jpg", "thumb": "photos/thumbs/photo-017.jpg", "w": 1800, "h": 1350, "album": "Saturday, October 31", "caption": ""},
+  {"src": "photos/web/photo-018.jpg", "thumb": "photos/thumbs/photo-018.jpg", "w": 1800, "h": 1350, "album": "Saturday, October 31", "caption": ""},
+  {"src": "photos/web/photo-019.jpg", "thumb": "photos/thumbs/photo-019.jpg", "w": 1800, "h": 1350, "album": "Saturday, October 31", "caption": ""},
+  {"src": "photos/web/photo-020.jpg", "thumb": "photos/thumbs/photo-020.jpg", "w": 1800, "h": 1350, "album": "Saturday, October 31", "caption": ""},
+  {"src": "photos/web/photo-021.jpg", "thumb": "photos/thumbs/photo-021.jpg", "w": 1800, "h": 1350, "album": "Saturday, October 31", "caption": ""},
+  {"src": "photos/web/photo-022.jpg", "thumb": "photos/thumbs/photo-022.jpg", "w": 1350, "h": 1800, "album": "Saturday, October 31", "caption": ""}
+];

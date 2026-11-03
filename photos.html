@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photos · GTIIT Colloquium on the Foundations of Modern Software Engineering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a1f2e;
+      --paper: #f7f6f2;
+      --rule: #c8c4b8;
+      --accent: #2a5ca8;
+      --muted: #6b6860;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.6;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    body.lb-open { overflow: hidden; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── Header ── */
+    .top { border-bottom: 2px solid var(--ink); padding: 1.6rem 0 1.4rem; }
+    .bar { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; }
+    .logo { width: 108px; height: auto; flex-shrink: 0; }
+    .titles { flex: 1; min-width: 240px; }
+    .kicker {
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);
+    }
+    h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 600; line-height: 1.2; margin: 0.2rem 0 0.1rem; }
+    .sub { font-family: 'Inter', sans-serif; font-size: 0.92rem; color: var(--muted); }
+    .back {
+      font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 500;
+      color: var(--accent); text-decoration: none; white-space: nowrap;
+    }
+    .back:hover { text-decoration: underline; }
+
+    /* ── Controls ── */
+    main { padding: 1.6rem 0 3rem; }
+    .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.9rem; }
+    .chip {
+      font-family: 'Inter', sans-serif; font-size: 0.86rem; font-weight: 500;
+      padding: 0.45rem 0.95rem; border: 1px solid var(--rule); border-radius: 999px;
+      background: #fff; color: var(--ink); cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .chip:hover { border-color: var(--accent); }
+    .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .chip:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    .status { font-family: 'Inter', sans-serif; font-size: 0.88rem; color: var(--muted); margin-bottom: 0.9rem; }
+    .demo-note {
+      font-family: 'Inter', sans-serif; font-size: 0.86rem; background: #f6e6cc; color: #5b3a05;
+      border-left: 3px solid #b9770e; padding: 0.6rem 0.9rem; margin-bottom: 1rem;
+    }
+    .empty { font-size: 1.1rem; color: var(--muted); padding: 3rem 0; }
+
+    /* ── Thumbnail grid ── */
+    .grid {
+      list-style: none; display: grid; gap: 10px;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+    }
+    .thumb {
+      display: block; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; position: relative;
+      border: 0; background: #e6e2d6; cursor: zoom-in;
+    }
+    .thumb img {
+      display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%;
+      transition: transform 0.35s ease;
+    }
+    .thumb:hover img, .thumb:focus-visible img { transform: scale(1.05); }
+    .thumb:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+      .logo { width: 84px; }
+    }
+
+    /* ── Viewer ── */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 100; background: rgba(12, 15, 24, 0.95);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox[hidden] { display: none; }
+    .lb-stage {
+      width: 100%; height: 100%; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 0.7rem; padding: 3.4rem 4.6rem 3.6rem;
+    }
+    .lb-stage img { flex: 1 1 auto; min-height: 0; max-width: 100%; max-height: 100%; object-fit: contain; transition: opacity 0.2s; }
+    .lb-stage img.loading { opacity: 0.35; }
+    .lb-cap { font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #f3f1ea; text-align: center; min-height: 1.4em; }
+    .lb-count {
+      position: absolute; left: 0; right: 0; bottom: 0.9rem; text-align: center;
+      font-family: 'Inter', sans-serif; font-size: 0.82rem; color: #aeb6c8;
+    }
+    .lb-btn {
+      position: absolute; display: grid; place-items: center; width: 52px; height: 52px;
+      border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.12); color: #fff;
+      font-size: 2rem; line-height: 1; cursor: pointer; transition: background 0.15s;
+    }
+    .lb-btn:hover { background: rgba(255, 255, 255, 0.25); }
+    .lb-btn:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+    .lb-close { top: 0.8rem; right: 0.8rem; font-size: 1.7rem; }
+    .lb-prev { left: 0.8rem; top: 50%; transform: translateY(-50%); }
+    .lb-next { right: 0.8rem; top: 50%; transform: translateY(-50%); }
+    .lb-single .lb-prev, .lb-single .lb-next { display: none; }
+    @media (max-width: 600px) {
+      .lb-stage { padding: 3.4rem 0.6rem 3.4rem; }
+      .lb-btn { width: 46px; height: 46px; }
+      .lb-prev { top: auto; bottom: 0.7rem; left: 0.7rem; transform: none; }
+      .lb-next { top: auto; bottom: 0.7rem; right: 0.7rem; transform: none; }
+    }
+
+    footer { border-top: 1px solid var(--rule); padding: 1.6rem 0 2.2rem; text-align: center; font-family: 'Inter', sans-serif; font-size: 0.82rem; color: var(--muted); }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    @media (prefers-reduced-motion: reduce) {
+      .thumb img, .lb-stage img, .chip, .lb-btn { transition: none; }
+      .thumb:hover img, .thumb:focus-visible img { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="top">
+  <div class="container bar">
+    <svg class="logo" role="img" viewBox="0 0 680 540" xmlns="http://www.w3.org/2000/svg" aria-label="Colloquium logo mark — gear with Hoare triple and GTIIT state machine">
+      <defs>
+        <marker id="arr-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <!-- Outer rings -->
+      <circle cx="340" cy="248" r="170" fill="none" stroke="#2a5ca8" stroke-width="2"/>
+      <circle cx="340" cy="248" r="162" fill="none" stroke="#2a5ca8" stroke-width="0.5" stroke-dasharray="4 6"/>
+      <!-- Gear teeth -->
+      <g>
+        <g transform="rotate(0   340 248)"><rect x="329" y="70" width="22" height="16" rx="2" fill="#e6f1fb" stroke="#2a5ca8" stroke-width="1.2"/></g>
+        <g transform="rotate(30  340 248)"><rect x="329" y="70" width="22" height="16" rx="2" fill="#e6f1fb" stroke="#2a5ca8" stroke-width="1.2"/></g>
+        <g transform="rotate(60  340 248)"><rect x="329" y="70" width="22" height="16" rx="2" fill="#e6f1fb" stroke="#2a5ca8" stroke-width="1.2"/></g>
+        <g transform="rotate(90  340 248)"><rect x="329" y="70" width="22" height="16" rx="2" fill="#e6f1fb" stroke="#2a5ca8" stroke-width="1.2"/></g>
+        <g transform="rotate(120 340 248)"><rect x="329" y="70" width="22" height="16" rx="2" fill="#e6f1fb" stroke="#2a5ca8" stroke-width="1.2"/></g>
+        <g transform="rotate(150 340 248)"><rect x="329" y="70" width="22" height="16" rx="2" fill="#e6f1fb" stroke="#2a5ca8" stroke-width="1.2"/></g>
+        <g transform="rotate(180 340 248)"><rect x="329" y="70" width="22" height="16" rx="2" fill="#e6f1fb" stroke="#2a5ca8" stroke-width="1.2"/></g>
+        <g transform="rotate(210 340 248)"><rect x="329" y="70" width="22" height="16" rx="2" fill="#e6f1fb" stroke="#2a5ca8" stroke-width="1.2"/></g>
+        <g transform="rotate(240 340 248)"><rect x="329" y="70" width="22" height="16" rx="2" fill="#e6f1fb" stroke="#2a5ca8" stroke-width="1.2"/></g>
+        <g transform="rotate(270 340 248)"><rect x="329" y="70" width="22" height="16" rx="2" fill="#e6f1fb" stroke="#2a5ca8" stroke-width="1.2"/></g>
+        <g transform="rotate(300 340 248)"><rect x="329" y="70" width="22" height="16" rx="2" fill="#e6f1fb" stroke="#2a5ca8" stroke-width="1.2"/></g>
+        <g transform="rotate(330 340 248)"><rect x="329" y="70" width="22" height="16" rx="2" fill="#e6f1fb" stroke="#2a5ca8" stroke-width="1.2"/></g>
+      </g>
+      <!-- Inner circle -->
+      <circle cx="340" cy="248" r="130" fill="#f7f6f2" stroke="#2a5ca8" stroke-width="1.5"/>
+      <!-- Hoare triple -->
+      <text font-family="'Courier New', monospace" font-size="26" font-weight="700" text-anchor="middle">
+        <tspan x="340" y="182" fill="#185fa5">{ P }</tspan><tspan fill="#1a1f2e" dx="5">S</tspan><tspan fill="#3b6d11" dx="5">{ Q }</tspan>
+      </text>
+      <line x1="250" y1="196" x2="430" y2="196" stroke="#c8c4b8" stroke-width="0.8"/>
+      <!-- entry arrow -->
+      <line x1="188" y1="240" x2="200" y2="240" stroke="#1a1f2e" stroke-width="1.5" marker-end="url(#arr-g)"/>
+      <line x1="188" y1="233" x2="188" y2="248" stroke="#1a1f2e" stroke-width="1.5"/>
+      <!-- G -->
+      <circle cx="220" cy="240" r="18" fill="#185fa5" stroke="#2a5ca8" stroke-width="1"/>
+      <text x="220" y="246" font-family="'Courier New', monospace" font-size="14" font-weight="700" fill="#e6f1fb" text-anchor="middle">G</text>
+      <!-- G → T1 -->
+      <line x1="234" y1="252" x2="263" y2="268" stroke="#2a5ca8" stroke-width="1.5" marker-end="url(#arr-g)"/>
+      <!-- T1 -->
+      <circle cx="280" cy="278" r="18" fill="#f7f6f2" stroke="#2a5ca8" stroke-width="1.5"/>
+      <text x="280" y="284" font-family="'Courier New', monospace" font-size="14" font-weight="700" fill="#1a1f2e" text-anchor="middle">T</text>
+      <!-- T1 → I1 -->
+      <line x1="296" y1="266" x2="323" y2="251" stroke="#2a5ca8" stroke-width="1.5" marker-end="url(#arr-g)"/>
+      <!-- self-loop on I1 -->
+      <path d="M 328 223 A 18 16 0 1 1 352 223" fill="none" stroke="#2a5ca8" stroke-width="1.2" stroke-dasharray="3 2" marker-end="url(#arr-g)"/>
+      <!-- I1 -->
+      <circle cx="340" cy="240" r="18" fill="#f7f6f2" stroke="#2a5ca8" stroke-width="1.5"/>
+      <text x="340" y="246" font-family="'Courier New', monospace" font-size="14" font-weight="700" fill="#1a1f2e" text-anchor="middle">I</text>
+      <!-- I1 → I2 -->
+      <line x1="356" y1="252" x2="383" y2="267" stroke="#2a5ca8" stroke-width="1.5" marker-end="url(#arr-g)"/>
+      <!-- I2 -->
+      <circle cx="400" cy="278" r="18" fill="#f7f6f2" stroke="#2a5ca8" stroke-width="1.5"/>
+      <text x="400" y="284" font-family="'Courier New', monospace" font-size="14" font-weight="700" fill="#1a1f2e" text-anchor="middle">I</text>
+      <!-- I2 → T2 -->
+      <line x1="416" y1="266" x2="443" y2="251" stroke="#2a5ca8" stroke-width="1.5" marker-end="url(#arr-g)"/>
+      <!-- T2 — accepting -->
+      <circle cx="460" cy="240" r="18" fill="#f7f6f2" stroke="#3b6d11" stroke-width="1.5"/>
+      <circle cx="460" cy="240" r="12" fill="none" stroke="#3b6d11" stroke-width="1"/>
+      <text x="460" y="246" font-family="'Courier New', monospace" font-size="14" font-weight="700" fill="#3b6d11" text-anchor="middle">T</text>
+      <!-- Ant entering T2, aligned with arrow direction (rotate 61) -->
+      <g transform="translate(433,256) rotate(61)">
+        <path d="M -2 -9  Q -5 -13 -6 -16" fill="none" stroke="#1a1f2e" stroke-width="0.75" stroke-linecap="round"/>
+        <circle cx="-6.5" cy="-17" r="1.1" fill="#1a1f2e"/>
+        <path d="M  2 -9  Q  5 -13  6 -16" fill="none" stroke="#1a1f2e" stroke-width="0.75" stroke-linecap="round"/>
+        <circle cx=" 6.5" cy="-17" r="1.1" fill="#1a1f2e"/>
+        <ellipse cx="0" cy="-6" rx="4.5" ry="4" fill="#1a1f2e"/>
+        <ellipse cx="0" cy="-1.5" rx="1.5" ry="1.2" fill="#1a1f2e"/>
+        <ellipse cx="0" cy="3" rx="4" ry="3.5" fill="#1a1f2e"/>
+        <ellipse cx="0" cy="7.5" rx="1.4" ry="1.4" fill="#1a1f2e"/>
+        <ellipse cx="0" cy="13" rx="4" ry="5.5" fill="#1a1f2e"/>
+        <path d="M -3.5  1 Q -7  1 -9  4"  fill="none" stroke="#1a1f2e" stroke-width="0.75" stroke-linecap="round"/>
+        <path d="M -3.5  4 Q -7  6 -8  9"  fill="none" stroke="#1a1f2e" stroke-width="0.75" stroke-linecap="round"/>
+        <path d="M -3.5 10 Q -6 12 -7 16"  fill="none" stroke="#1a1f2e" stroke-width="0.75" stroke-linecap="round"/>
+        <path d="M  3.5  1 Q  6  0  8  3"  fill="none" stroke="#1a1f2e" stroke-width="0.75" stroke-linecap="round"/>
+        <path d="M  3.5  4 Q  7  4  8  8"  fill="none" stroke="#1a1f2e" stroke-width="0.75" stroke-linecap="round"/>
+        <path d="M  3.5 10 Q  6 11  7 15"  fill="none" stroke="#1a1f2e" stroke-width="0.75" stroke-linecap="round"/>
+      </g>
+    </svg>
+    <div class="titles">
+      <p class="kicker">GTIIT · Shantou, China · October 30–31, 2026</p>
+      <h1>Photo gallery</h1>
+      <p class="sub">Colloquium on the Foundations of Modern Software Engineering</p>
+    </div>
+    <a class="back" href="index.html">← Back to the colloquium page</a>
+  </div>
+</header>
+
+<main class="container">
+  <div id="demo-note" class="demo-note" hidden>Demo mode: these are placeholder images. Remove <code>?demo</code> from the address to see the real photos.</div>
+  <div id="filters" class="filters" role="group" aria-label="Show photos from" hidden></div>
+  <p id="status" class="status" aria-live="polite"></p>
+  <ul id="grid" class="grid"></ul>
+  <p id="empty" class="empty" hidden>Photos from the colloquium will be posted here soon.</p>
+  <noscript><p class="empty">The gallery needs JavaScript. Please enable it to see the photos.</p></noscript>
+</main>
+
+<footer>
+  <div class="container">GTIIT Colloquium on the Foundations of Modern Software Engineering · Shantou, China · October 30–31, 2026 · <a href="index.html">Colloquium page</a></div>
+</footer>
+
+<!-- Photo viewer -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button id="lb-close" class="lb-btn lb-close" type="button" aria-label="Close (Esc)">&times;</button>
+  <button id="lb-prev" class="lb-btn lb-prev" type="button" aria-label="Previous photo (left arrow)">&#8249;</button>
+  <figure class="lb-stage" id="lb-stage">
+    <img id="lb-img" alt="" />
+    <figcaption id="lb-cap" class="lb-cap"></figcaption>
+  </figure>
+  <button id="lb-next" class="lb-btn lb-next" type="button" aria-label="Next photo (right arrow)">&#8250;</button>
+  <div id="lb-count" class="lb-count"></div>
+</div>
+
+<!-- The list of photos (written by make_gallery.py) -->
+<script src="photos/photos.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var all = (window.PHOTOS || []).slice();
+  var demo = /[?&]demo(=|&|$)/.test(location.search);
+
+  // ── Placeholder photos for previewing the layout (open photos.html?demo) ──
+  function makeDemo() {
+    var out = [], hues = [210, 28, 150, 340, 260, 45];
+    for (var i = 0; i < 30; i++) {
+      var w = 1600, h = (i % 5 === 3) ? 2000 : 1067, hue = hues[i % hues.length];
+      var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '">' +
+        '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl(' + hue + ',55%,62%)"/>' +
+        '<stop offset="1" stop-color="hsl(' + ((hue + 40) % 360) + ',60%,36%)"/></linearGradient></defs>' +
+        '<rect width="100%" height="100%" fill="url(#g)"/>' +
+        '<text x="50%" y="55%" font-family="Georgia,serif" font-size="' + Math.round(h / 4) + '" fill="rgba(255,255,255,.85)" text-anchor="middle">' + (i + 1) + '</text></svg>';
+      var uri = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+      out.push({ src: uri, thumb: uri, w: w, h: h, album: i < 14 ? 'Friday, October 30' : 'Saturday, October 31', caption: 'Demo photo ' + (i + 1) });
+    }
+    return out;
+  }
+  if (demo) { all = makeDemo(); document.getElementById('demo-note').hidden = false; }
+
+  var grid = document.getElementById('grid');
+  var filtersEl = document.getElementById('filters');
+  var statusEl = document.getElementById('status');
+  var emptyEl = document.getElementById('empty');
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lb-img');
+  var lbCap = document.getElementById('lb-cap');
+  var lbCount = document.getElementById('lb-count');
+  var btnClose = document.getElementById('lb-close');
+  var btnPrev = document.getElementById('lb-prev');
+  var btnNext = document.getElementById('lb-next');
+
+  var visible = [], selected = '', index = 0, lastFocus = null;
+
+  // albums, in order of first appearance
+  var albums = [];
+  all.forEach(function (p) { if (p.album && albums.indexOf(p.album) < 0) albums.push(p.album); });
+
+  function count(album) { return all.filter(function (p) { return !album || p.album === album; }).length; }
+
+  function buildFilters() {
+    if (albums.length < 2) return;
+    filtersEl.hidden = false;
+    [''].concat(albums).forEach(function (a) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'chip';
+      b.textContent = (a || 'All photos') + ' (' + count(a) + ')';
+      b.setAttribute('aria-pressed', String(a === selected));
+      b.addEventListener('click', function () {
+        selected = a;
+        Array.prototype.forEach.call(filtersEl.children, function (c) { c.setAttribute('aria-pressed', String(c === b)); });
+        render();
+      });
+      filtersEl.appendChild(b);
+    });
+  }
+
+  function render() {
+    visible = all.filter(function (p) { return !selected || p.album === selected; });
+    grid.innerHTML = '';
+    visible.forEach(function (p, i) {
+      var li = document.createElement('li');
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'thumb';
+      b.setAttribute('aria-label', 'Open photo ' + (i + 1) + ' of ' + visible.length + (p.caption ? ': ' + p.caption : ''));
+      var im = new Image();
+      im.alt = '';
+      im.loading = 'lazy'; im.decoding = 'async';
+      im.src = p.thumb || p.src;
+      b.appendChild(im);
+      b.addEventListener('click', function () { openAt(i, b); });
+      li.appendChild(b);
+      grid.appendChild(li);
+    });
+    statusEl.textContent = visible.length + (visible.length === 1 ? ' photo' : ' photos') + (selected ? ' · ' + selected : '');
+  }
+
+  // ── Viewer ──
+  function show(i) {
+    index = (i + visible.length) % visible.length;
+    var p = visible[index];
+    lbImg.classList.add('loading');
+    lbImg.onload = function () { lbImg.classList.remove('loading'); };
+    lbImg.src = p.src;
+    lbImg.alt = p.caption || ('Photo ' + (index + 1) + ' of ' + visible.length);
+    lbCap.textContent = p.caption || '';
+    lbCount.textContent = (index + 1) + ' / ' + visible.length + (p.album ? ' · ' + p.album : '');
+    [index + 1, index - 1].forEach(function (j) {
+      var q = visible[(j + visible.length) % visible.length];
+      if (q && q !== p) { var pre = new Image(); pre.src = q.src; }
+    });
+  }
+  function openAt(i, opener) {
+    lastFocus = opener || null;
+    lb.classList.toggle('lb-single', visible.length < 2);
+    lb.hidden = false;
+    document.body.classList.add('lb-open');
+    show(i);
+    btnClose.focus();
+  }
+  function close() {
+    lb.hidden = true;
+    document.body.classList.remove('lb-open');
+    lbImg.removeAttribute('src');
+    if (lastFocus) lastFocus.focus();
+  }
+  btnClose.addEventListener('click', close);
+  btnPrev.addEventListener('click', function () { show(index - 1); });
+  btnNext.addEventListener('click', function () { show(index + 1); });
+  lb.addEventListener('click', function (e) { if (e.target === lb || e.target.id === 'lb-stage') close(); });
+
+  document.addEventListener('keydown', function (e) {
+    if (lb.hidden) return;
+    var k = e.key;
+    if (k === 'Escape') { close(); }
+    else if (k === 'ArrowRight') { show(index + 1); }
+    else if (k === 'ArrowLeft') { show(index - 1); }
+    else if (k === 'Home') { show(0); }
+    else if (k === 'End') { show(visible.length - 1); }
+    else if (k === 'Tab') {
+      var f = (visible.length < 2) ? [btnClose] : [btnClose, btnPrev, btnNext];
+      var pos = f.indexOf(document.activeElement);
+      if (e.shiftKey && pos <= 0) { f[f.length - 1].focus(); e.preventDefault(); }
+      else if (!e.shiftKey && pos === f.length - 1) { f[0].focus(); e.preventDefault(); }
+      else if (pos < 0) { f[0].focus(); e.preventDefault(); }
+    }
+  });
+
+  // swipe on touch screens
+  var x0 = null;
+  lb.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 50 && visible.length > 1) show(index + (dx < 0 ? 1 : -1));
+  });
+
+  // ── Start ──
+  if (!all.length) {
+    emptyEl.hidden = false;
+  } else {
+    buildFilters();
+    render();
+  }
+})();
+</script>
+</body>
+</html>
